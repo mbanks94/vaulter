@@ -1,0 +1,25 @@
+{
+"frames": {
+	"chest_full01.png": {
+		"frame": {"x":17, "y":0, "w":16, "h":14},
+		"spriteSourceSize": {"x":0,"y":2,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	"chest_full02.png": {
+		"frame": {"x":0, "y":17, "w":16, "h":15},
+		"spriteSourceSize": {"x":0,"y":1,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	},
+	"chest_full03.png": {
+		"frame": {"x":0, "y":0, "w":16, "h":16},
+		"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+		"sourceSize": {"w":16,"h":16}
+	}
+
+},
+"meta": {
+	"image": "loot.png",
+	"size": {"w": 34, "h": 33},
+	"scale": "1"
+}
+}

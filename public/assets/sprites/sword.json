@@ -1,0 +1,15 @@
+{
+"frames": {
+	"weapon_lavish_sword.png": {
+		"frame": {"x":0, "y":0, "w":10, "h":30},
+		"spriteSourceSize": {"x":0,"y":0,"w":10,"h":30},
+		"sourceSize": {"w":10,"h":30}
+	}
+
+},
+"meta": {
+	"image": "sword.png",
+	"size": {"w": 11, "h": 31},
+	"scale": "1"
+}
+}

@@ -1,0 +1,15 @@
+{
+"frames": {
+	"weapon_katana.png": {
+		"frame": {"x":0, "y":0, "w":6, "h":29},
+		"spriteSourceSize": {"x":0,"y":0,"w":6,"h":29},
+		"sourceSize": {"w":6,"h":29}
+	}
+
+},
+"meta": {
+	"image": "katana.png",
+	"size": {"w": 7, "h": 30},
+	"scale": "1"
+}
+}
