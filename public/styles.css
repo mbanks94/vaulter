@@ -1,0 +1,12 @@
+body {
+  background-color: rgb(50, 36, 29);
+}
+#game-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15vh;
+}
+canvas {
+  border: 2vw solid rgba(162, 174, 131, 0.35);
+}
