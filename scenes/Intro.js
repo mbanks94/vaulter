@@ -5,16 +5,16 @@ export default class Intro extends Phaser.Scene {
 		});
 	}
 	preload() {
-    this.load.image('dungeon-tiles', 'assets/tiles/ForgottenDungeon.png');
-    this.load.tilemapTiledJSON('intro', '/assets/tiles/intro.json');
-    this.load.audio('introsong', ['assets/sounds/dubiousdungeon.mp3']);
+    this.load.image('dungeon-tiles', '/tiles/ForgottenDungeon.png');
+    this.load.tilemapTiledJSON('intro', '/tiles/intro.json');
+    this.load.audio('introsong', ['/sounds/dubiousdungeon.mp3']);
 		this.load.script(
 			'webfont',
 			'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
 		);
 
 		var progress = this.add.graphics();
-		const self = this;
+
 		this.load.on('progress', function(value) {
 			progress.clear();
 			progress.fillStyle(0x42f456, 1);

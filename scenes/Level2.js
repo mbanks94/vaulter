@@ -6,23 +6,22 @@ export default class Level2 extends Phaser.Scene {
   }
 
   preload() {
-    this.load.audio('bgmusic', ['assets/sounds/sinisterloop.wav']);
-    this.load.audio('death', ['assets/sounds/death2.wav']);
-    this.load.audio('coin', ['assets/sounds/coin.wav']);
-    this.load.audio('jump', ['assets/sounds/jump.wav']);
-    this.load.image('dungeon-tiles', 'assets/tiles/ForgottenDungeon.png');
-    this.load.tilemapTiledJSON('map2', '/assets/tiles/level2.json');
-    this.load.atlas('knight', 'assets/sprites/knight.png', 'assets/sprites/knight.json');
-    this.load.atlas('loot', 'assets/sprites/loot.png', 'assets/sprites/loot.json');
-    this.load.atlas('mimic', 'assets/sprites/mimic.png', 'assets/sprites/mimic.json');
-    this.load.atlas('zom', 'assets/sprites/tinyZom.png', 'assets/sprites/tinyZom.json');
-    this.load.atlas('skel', 'assets/sprites/skeleton.png', 'assets/sprites/skeleton.json');
-    this.load.atlas('rustySword', 'assets/sprites/rustySword.png', 'assets/sprites/rustySword.json');
-    this.load.atlas('katana', 'assets/sprites/katana.png', 'assets/sprites/katana.json');
+    this.load.audio('bgmusic', ['/sounds/sinisterloop.wav']);
+    this.load.audio('death', ['/sounds/death2.wav']);
+    this.load.audio('coin', ['/sounds/coin.wav']);
+    this.load.audio('jump', ['/sounds/jump.wav']);
+    this.load.image('dungeon-tiles', '/tiles/ForgottenDungeon.png');
+    this.load.tilemapTiledJSON('map2', '/tiles/level2.json');
+    this.load.atlas('knight', '/sprites/knight.png', '/sprites/knight.json');
+    this.load.atlas('loot', '/sprites/loot.png', '/sprites/loot.json');
+    this.load.atlas('mimic', '/sprites/mimic.png', '/sprites/mimic.json');
+    this.load.atlas('zom', '/sprites/tinyZom.png', '/sprites/tinyZom.json');
+    this.load.atlas('skel', '/sprites/skeleton.png', '/sprites/skeleton.json');
+    this.load.atlas('rustySword', '/sprites/rustySword.png', '/sprites/rustySword.json');
+    this.load.atlas('katana', '/sprites/katana.png', '/sprites/katana.json');
   }
 
   create() {
-    // this.bgmusic = this.sound.add('bgmusic').setVolume(0.3).play();
     this.deathSound = this.sound.add('death').setVolume(0.5);
     this.lootSound = this.sound.add('coin').setVolume(0.5);
     this.jumpSound = this.sound.add('jump').setVolume(0.3);

@@ -6,15 +6,15 @@ export default class Level1 extends Phaser.Scene {
   }
 
   preload() {
-    this.load.audio('bgmusic', ['assets/sounds/sinisterloop.wav']);
-    this.load.audio('death', ['assets/sounds/death2.wav']);
-    this.load.audio('coin', ['assets/sounds/coin.wav']);
-    this.load.audio('jump', ['assets/sounds/jump.wav']);
-    this.load.image('dungeon-tiles', 'assets/tiles/ForgottenDungeon.png');
-    this.load.tilemapTiledJSON('map', '/assets/tiles/level1.json');
-    this.load.atlas('knight', 'assets/sprites/knight.png', 'assets/sprites/knight.json');
-    this.load.atlas('loot', 'assets/sprites/loot.png', 'assets/sprites/loot.json');
-    this.load.atlas('imp', 'assets/sprites/imp.png', 'assets/sprites/imp.json');
+    this.load.audio('bgmusic', ['/sounds/sinisterloop.wav']);
+    this.load.audio('death', ['/sounds/death2.wav']);
+    this.load.audio('coin', ['/sounds/coin.wav']);
+    this.load.audio('jump', ['/sounds/jump.wav']);
+    this.load.image('dungeon-tiles', '/tiles/ForgottenDungeon.png');
+    this.load.tilemapTiledJSON('map', '/tiles/level1.json');
+    this.load.atlas('knight', '/sprites/knight.png', '/sprites/knight.json');
+    this.load.atlas('loot', '/sprites/loot.png', '/sprites/loot.json');
+    this.load.atlas('imp', '/sprites/imp.png', '/sprites/imp.json');
   }
 
   create() {

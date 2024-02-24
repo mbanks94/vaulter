@@ -5,9 +5,9 @@ export default class End extends Phaser.Scene {
     })
   }
   preload() {
-    this.load.image('dungeon-tiles', 'assets/tiles/ForgottenDungeon.png');
-    this.load.tilemapTiledJSON('end', '/assets/tiles/end.json');
-    this.load.audio('introsong', ['assets/sounds/dubiousdungeon.mp3']);
+    this.load.image('dungeon-tiles', '/tiles/ForgottenDungeon.png');
+    this.load.tilemapTiledJSON('end', '/tiles/end.json');
+    this.load.audio('introsong', ['/sounds/dubiousdungeon.mp3']);
     this.load.script(
       'webfont',
       'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'

@@ -1,33 +1,34 @@
-export default class Level3 extends Phaser.Scene {
+export default class Level4 extends Phaser.Scene {
   constructor() {
     super({
-      key: "Level3"
-    });
+      key: "Level4"
+    })
   }
 
   preload() {
-    this.load.audio('bgmusic', ['assets/sounds/sinisterloop.wav']);
-    this.load.audio('death', ['assets/sounds/death2.wav']);
-    this.load.audio('coin', ['assets/sounds/coin.wav']);
-    this.load.audio('jump', ['assets/sounds/jump.wav']);
-    this.load.image('dungeon-tiles', 'assets/tiles/ForgottenDungeon.png');
-    this.load.tilemapTiledJSON('map3', '/assets/tiles/level3.json');
-    this.load.atlas('knight', 'assets/sprites/knight.png', 'assets/sprites/knight.json');
-    this.load.atlas('loot', 'assets/sprites/loot.png', 'assets/sprites/loot.json');
-    this.load.atlas('mace', 'assets/sprites/mace.png', 'assets/sprites/mace.json');
-    this.load.atlas('bigZom', 'assets/sprites/bigZom.png', 'assets/sprites/bigZom.json');
-    this.load.atlas('katana', 'assets/sprites/katana.png', 'assets/sprites/katana.json');
+    this.load.audio('bgmusic', ['/sounds/sinisterloop.wav']);
+    this.load.audio('death', ['/sounds/death2.wav']);
+    this.load.audio('coin', ['/sounds/coin.wav']);
+    this.load.audio('jump', ['/sounds/jump.wav']);
+    this.load.image('dungeon-tiles', '/tiles/ForgottenDungeon.png');
+    this.load.tilemapTiledJSON('map4', '/tiles/level4.json');
+    this.load.atlas('knight', '/sprites/knight.png', '/sprites/knight.json');
+    this.load.atlas('loot', '/sprites/loot.png', '/sprites/loot.json');
+    this.load.atlas('sword', '/sprites/sword.png', '/sprites/sword.json');
+    this.load.atlas('katana', '/sprites/katana.png', '/sprites/katana.json');
+    this.load.atlas('imp', '/sprites/imp.png', '/sprites/imp.json');
+    this.load.atlas('skel', '/sprites/skeleton.png', '/sprites/skeleton.json');
   }
 
   create() {
-    // this.bgmusic = this.sound.add('bgmusic').setVolume(0.3).play();
+    // Music
     this.deathSound = this.sound.add('death').setVolume(0.5);
     this.lootSound = this.sound.add('coin').setVolume(0.5);
     this.jumpSound = this.sound.add('jump').setVolume(0.3);
 
     // Create map from Tiled
     this.map = this.make.tilemap({
-      key: 'map3',
+      key: 'map4',
       tileWidth: 16,
       tileHeight: 16
     });
@@ -35,10 +36,10 @@ export default class Level3 extends Phaser.Scene {
     // Object Layers
     this.spawnPoint = this.map.findObject("Spawns", obj => obj.name === "enter");
     this.lootSpawn = this.map.findObject("Spawns", obj => obj.name === "loot");
-    this.secretSpawn = this.map.findObject("Spawns", obj => obj.name === "secret");
     this.group1Spawn = this.map.findObject("Spawns", obj => obj.name === "group1");
     this.group2Spawn = this.map.findObject("Spawns", obj => obj.name === "group2");
     this.group3Spawn = this.map.findObject("Spawns", obj => obj.name === "group3");
+    this.group4Spawn = this.map.findObject("Spawns", obj => obj.name === "group4");
 
     // Tile Layers
     const tileset = this.map.addTilesetImage('Dungeon-Tileset', 'dungeon-tiles');
@@ -56,39 +57,48 @@ export default class Level3 extends Phaser.Scene {
       collides: true
     });
 
-    // Sprites & Groups
+    // Sprites
     this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y, 'knight', 'knight_idle02.png');
     this.loot = this.physics.add.sprite(this.lootSpawn.x, this.lootSpawn.y, 'loot', 'chest_full01.png');
-    this.secret = this.physics.add.sprite(this.secretSpawn.x, this.secretSpawn.y, 'loot', 'chest_full01.png');
-    this.maces = this.physics.add.group({
-      key: 'mace',
-      repeat: 1,
+    this.imps = this.physics.add.group({
+      key: 'imp',
+      repeat: 4,
       setXY: {
         x: this.group1Spawn.x,
         y: this.group1Spawn.y,
-        stepX: 100,
-        stepY: 0
-      }
-    });
-    this.zombies = this.physics.add.group({
-      key: 'bigZom',
-      repeat: 1,
-      setXY: {
-        x: this.group2Spawn.x,
-        y: this.group2Spawn.y,
-        stepX: 100,
-        stepY: 0
+        stepX: 32,
+        stepY: -32
       }
     });
     this.katanas = this.physics.add.group({
       key: 'katana',
-      repeat: 3,
+      repeat: 2,
       setXY: {
-        x: this.group3Spawn.x,
-        y: this.group3Spawn.y,
+        x: this.group2Spawn.x,
+        y: this.group2Spawn.y,
         stepX: 48,
         stepY: 0
       }
+    });
+    this.skeles = this.physics.add.group({
+      key: 'skel',
+      repeat: 2,
+      setXY: {
+        x: this.group3Spawn.x,
+        y: this.group3Spawn.y,
+        stepX: 110,
+        stepY: -48
+      }
+    });
+    this.swords = this.physics.add.group({
+      key: 'sword',
+      repeat: 2,
+      setXY: {
+        x: this.group4Spawn.x,
+        y: this.group4Spawn.y,
+        stepX: 64,
+        stepY: 0
+      }  
     });
 
     // Collisions
@@ -98,20 +108,19 @@ export default class Level3 extends Phaser.Scene {
     this.physics.add.collider(this.terrain, this.player);
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.platforms, this.loot);
-    this.physics.add.collider(this.platforms, this.secret);
-    this.physics.add.collider(this.platforms, this.zombies);
-    this.physics.add.collider(this.terrain, this.zombies);
+    this.physics.add.collider(this.platforms, this.imps);
+    this.physics.add.collider(this.platforms, this.skeles);
+    this.physics.add.collider(this.platforms, this.swords);
     this.physics.add.collider(this.loot, this.player, () => this.lootOpen(), null, this);
-    this.physics.add.collider(this.secret, this.player, () => this.secretOpen(), null, this);
-    this.physics.add.collider(this.maces, this.player, () => this.death(), null, this);
-    this.physics.add.collider(this.zombies, this.player, () => this.death(), null, this);
-    this.physics.add.collider(this.katanas, this.player, () => this.death(), null, this);
+    this.physics.add.collider(this.player, this.imps, () => this.death(), null, this);
+    this.physics.add.collider(this.player, this.skeles, () => this.death(), null, this);
+    this.physics.add.collider(this.player, this.swords, () => this.death(), null, this);
+    this.physics.add.collider(this.player, this.katanas, () => this.death(), null, this);
     this.loot.setImmovable();
-    this.secret.setImmovable();
     this.jumpCount = 0;
     this.maxJump = 2;
 
-    // Create Animations
+    // Animations
     this.anims.create({
       key: 'walk',
       repeat: -1,
@@ -150,36 +159,33 @@ export default class Level3 extends Phaser.Scene {
       })
     });
     this.anims.create({
-      key: 'big_zom_walk',
+      key: 'imp_walk',
       repeat: -1,
       frameRate: 10,
-      frames: this.anims.generateFrameNames('bigZom', {
-        prefix: 'big_zombie_run',
+      frames: this.anims.generateFrameNames('imp', {
+        prefix: 'imp_run',
         suffix: '.png',
         start: 1,
         end: 4,
         zeroPad: 2
       })
     });
-
-    this.maces.getChildren().forEach(child => {
-      child.setCollideWorldBounds(true).setImmovable();
-      let speed = 1000 + Math.random() * (4000 - 1000);
-      let dist = (40 + Math.random() * (100 - 40)) * -1;
-      this.tweens.add({
-        targets: child,
-        y: `+=${dist}`,
-        ease: 'Linear',
-        duration: speed,
-        // flipY: true,
-        yoyo: true,
-        repeat: -1
-      });
+    this.anims.create({
+      key: 'skel_walk',
+      repeat: -1,
+      frameRate: 10,
+      frames: this.anims.generateFrameNames('skel', {
+        prefix: 'skelet_run',
+        suffix: '.png',
+        start: 1,
+        end: 4,
+        zeroPad: 2
+      })
     });
-    this.zombies.getChildren().forEach(child => {
-      child.play('big_zom_walk').setImmovable();
+    this.skeles.getChildren().forEach(child => {
+      child.play('skel_walk').setImmovable();
       let speed = 1000 + Math.random() * (4000 - 1000);
-      let dist = 40 + Math.random() * (100 - 40);
+      let dist = 20 + Math.random() * (40 - 20);
       this.tweens.add({
         targets: child,
         x: `+=${dist}`,
@@ -193,23 +199,49 @@ export default class Level3 extends Phaser.Scene {
     this.katanas.getChildren().forEach(child => {
       child.setCollideWorldBounds(true).setImmovable();
       let speed = 1000 + Math.random() * (4000 - 1000);
-      let dist = (40 + Math.random() * (100 - 40)) * -1;
+      let dist = (40 + Math.random() * (150 - 40)) * -1;
       this.tweens.add({
         targets: child,
         y: `+=${dist}`,
         ease: 'Linear',
         duration: speed,
-        // flipY: true,
+        yoyo: true,
+        repeat: -1
+      });
+    });
+    this.imps.getChildren().forEach(child => {
+      child.play('imp_walk');
+      let speed = 1000 + Math.random() * (4000 - 1000);
+      let dist = 5 + Math.random() * (7 - 5);
+      this.tweens.add({
+        targets: child,
+        x: `+=${dist}`,
+        ease: 'Linear',
+        duration: speed,
+        flipX: true,
+        yoyo: true,
+        repeat: -1
+      });
+    });
+    this.swords.getChildren().forEach(child => {
+      child.setCollideWorldBounds(true).setImmovable();
+      let speed = 1000 + Math.random() * (4000 - 1000);
+      let dist = (50 + Math.random() * (100 - 50)) * -1;
+      this.tweens.add({
+        targets: child,
+        y: `+=${dist}`,
+        ease: 'Linear',
+        duration: speed,
         yoyo: true,
         repeat: -1
       });
     });
 
-    // create inputs
+    // Inputs WASD or Arrows and Space 
     this.input.enabled = true;
-    this.keys = this.input.keyboard.addKeys('W, A, D, LEFT, RIGHT, UP, SPACE');
-    
-    // camera
+    this.keys = this.input.keyboard.addKeys('W, A, S, D, LEFT, RIGHT, UP, DOWN, SPACE');
+
+    // Camera set to follow player
     this.camera = this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     this.camera.startFollow(this.player).fadeIn(2000);
 
@@ -217,7 +249,6 @@ export default class Level3 extends Phaser.Scene {
   }
 
   update() {
-    // Player Movement
     if (this.keys.A.isDown || this.keys.LEFT.isDown) {
       this.player.flipX = true;
       this.player.setVelocityX(-75);
@@ -228,6 +259,8 @@ export default class Level3 extends Phaser.Scene {
       }
       this.player.setVelocityX(75);
       this.player.play('walk', true);
+    } else if (this.keys.S.isDown || this.keys.DOWN.isDown) {
+      this.player.setVelocityY(75);
     } else {
       this.player.setVelocityX(0);
       this.player.play('idle', true);
@@ -248,7 +281,7 @@ export default class Level3 extends Phaser.Scene {
       this.death();
     }
     if (this.grabLoot) {
-      this.scene.start('Level4');
+      this.scene.start('End');
     }
   }
 
@@ -266,11 +299,6 @@ export default class Level3 extends Phaser.Scene {
     this.loot.play('open', true);
     this.lootSound.play();
     setTimeout(() => this.grabLoot = true, 1000);
-  }
-
-  secretOpen() {
-    this.secret.play('open', true);
-    this.lootSound.play();
   }
 
   death() {
