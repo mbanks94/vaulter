@@ -6,7 +6,7 @@ export default class Level4 extends Phaser.Scene {
   }
 
   preload() {
-    this.load.audio('bgmusic', ['assets/sounds/sinisterloop.wav']);
+    this.load.audio('bgmusic', ['assets/sounds/sinisterloop.mp3']);
     this.load.audio('death', ['assets/sounds/death2.wav']);
     this.load.audio('coin', ['assets/sounds/coin.wav']);
     this.load.audio('jump', ['assets/sounds/jump.wav']);
