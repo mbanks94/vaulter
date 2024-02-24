@@ -61,8 +61,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: "public/assets", to: "assets" },
-        { from: "public/favicon.png", to: "favicon.png" },
-        { from: "public/style.css", to: "style.css" },
+        { from: "public/favicon.ico", to: "favicon.ico" },
+        { from: "public/styles.css", to: "styles.css" },
       ],
     }),
   ],
